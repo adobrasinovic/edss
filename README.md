@@ -1,6 +1,8 @@
 # EDSS Calculator
 
-The Kurtzke Expanded Disability Status Scale (EDSS) is a method of quantifying disability in multiple sclerosis. The scale has been developed by John F. Kurtzke. The EDSS quantifies disability in eight Functional Systems (FS) and allows neurologists to assign a Functional System Score (FSS) in each of these.
+The Expanded Disability Status Scale (EDSS) is the most common clinical scoring system used to evaluate the condition of MS patients. The overall disability score ranges from 0 (normal) to 10 (death due to MS) in half-point increments
+
+ The scale has been developed by John F. Kurtzke. The EDSS quantifies disability in eight Functional Systems (FS) and allows neurologists to assign a Functional System Score (FSS) in each of these.
 
 ## Getting Started
 

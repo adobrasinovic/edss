@@ -10,12 +10,12 @@ describe("calculateEDSS", function(){
         expect(() => edss.calculateEDSS(1,1,1,1,1,1,1,1,1,1,1)).to.throw('Wrong number of arguments.');
     });
 
-    it("should throw an error if there is an argument that is not a positive integer (checking for null,undefined and if argument is an integer)", function(){
-        expect(() => edss.calculateEDSS(1,1,1,1,'test',1,1,1)).to.throw(TypeError, 'Argument is not a positive integer.'); 
-        expect(() => edss.calculateEDSS(1,1,1.23,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a positive integer.'); 
-        expect(() => edss.calculateEDSS(-1,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a positive integer.'); 
-        expect(() => edss.calculateEDSS(null,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a positive integer.'); 
-        expect(() => edss.calculateEDSS(undefined,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a positive integer.'); 
+    it("should throw an error if there is an argument that is not a non-negative integer (checking for null,undefined and if argument is a non-negative integer)", function(){
+        expect(() => edss.calculateEDSS(1,1,1,1,'test',1,1,1)).to.throw(TypeError, 'Argument is not a non-negative integer.'); 
+        expect(() => edss.calculateEDSS(1,1,1.23,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a non-negative integer.'); 
+        expect(() => edss.calculateEDSS(-1,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a non-negative integer.'); 
+        expect(() => edss.calculateEDSS(null,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a non-negative integer.'); 
+        expect(() => edss.calculateEDSS(undefined,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a non-negative integer.'); 
     });
 
     // visualFunctionsScore 0 - 6
@@ -35,7 +35,41 @@ describe("calculateEDSS", function(){
         expect(() => edss.calculateEDSS(1,1,1,1,7,1,1,1)).to.throw('Argument is out of bounds. sensoryFunctionsScore');
         expect(() => edss.calculateEDSS(1,1,1,1,1,7,1,1)).to.throw('Argument is out of bounds. bowelAndBladderFunctionsScore'); 
         expect(() => edss.calculateEDSS(1,1,1,1,1,1,6,1)).to.throw('Argument is out of bounds. cerebralFunctionsScore'); 
-        expect(() => edss.calculateEDSS(1,1,1,1,1,1,1,16)).to.throw('Argument is out of bounds. ambulationScore'); 
+        expect(() => edss.calculateEDSS(1,1,1,1,1,1,1,17)).to.throw('Argument is out of bounds. ambulationScore'); 
+    });
+
+    it("should return correct EDSS values, when the score is determined solely by ambulationScore", function(){
+        // using random numbers in valid range, because in these cases after checking the ambulationScore the rest of arguments should have no importance
+        // this might help find some obscure bugs later on when the logic for calculating the EDSS score from first 7 arguments is added
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),16)).to.equal(10);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),15)).to.equal(9.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),14)).to.equal(9);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),13)).to.equal(8.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),12)).to.equal(8);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),11)).to.equal(7.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),10)).to.equal(7);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),9)).to.equal(6.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),8)).to.equal(6.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),7)).to.equal(6);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),6)).to.equal(6);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),5)).to.equal(6);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),4)).to.equal(5.5);
+        expect(edss.calculateEDSS(Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),
+        Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),Math.floor(Math.random() * 7),Math.floor(Math.random() * 7),Math.floor(Math.random() * 6),3)).to.equal(5);
+        
     });
 
 });
