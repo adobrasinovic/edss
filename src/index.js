@@ -9,6 +9,19 @@
 
 function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFunctionsScore, cerebellarFunctionsScore,
                        sensoryFunctionsScore, bowelAndBladderFunctionsScore, cerebralFunctionsScore, ambulationScore) {
+
+    if (arguments.length !== 8) {
+       throw new Error(`Wrong number of parameters. arguments.length = ${arguments.length}`); 
+    }
+
+    const argumentsArray = Array.from(arguments);
+
+    for (let argument of argumentsArray) {
+        if (argument == null  || isNaN(argument)) {
+            throw new TypeError(`Argument is not a number. argument = ${argument}`);
+        }
+    }
+
     return (+visualFunctionsScore) + (+brainstemFunctionScore + (+pyramidalFunctionsScore) + (+cerebellarFunctionsScore) + (+sensoryFunctionsScore) + 
         (+bowelAndBladderFunctionsScore) + (+cerebralFunctionsScore) + (+ambulationScore));
 }

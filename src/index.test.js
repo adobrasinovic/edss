@@ -4,10 +4,16 @@ var edss = require('./index');
 
 describe("calculateEDSS", function(){
 
-    it("if there is a wrong number of arguments it should throw an error", function(){
-        expect(() => edss.calculateEDSS()).to.throw(); 
-        expect(() => edss.calculateEDSS(1,1,1)).to.throw(); 
-        expect(() => edss.calculateEDSS(1,1,1,1,1,1,1,1,1,1,1,1)).to.throw(); 
+    it("should throw an error if there is a wrong number of parameters", function(){
+        expect(() => edss.calculateEDSS()).to.throw('Wrong number of parameters.'); 
+        expect(() => edss.calculateEDSS(1,1,1)).to.throw('Wrong number of parameters.'); 
+        expect(() => edss.calculateEDSS(1,1,1,1,1,1,1,1,1,1,1)).to.throw('Wrong number of parameters.');
+    });
+
+    it("should throw an error if there is a parameter that is not a number (checking for null,undefined and isNaN)", function(){
+        expect(() => edss.calculateEDSS(1,1,1,1,'test',1,1,1)).to.throw(TypeError, 'Argument is not a number.'); 
+        expect(() => edss.calculateEDSS(null,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a number.'); 
+        expect(() => edss.calculateEDSS(undefined,1,1,1,1,1,1,1)).to.throw(TypeError, 'Argument is not a number.'); 
     });
 
 });
