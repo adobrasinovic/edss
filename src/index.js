@@ -4,18 +4,18 @@ function findMaxValueInArrayAndNumberOfRepetitions(array) {
 
     const numberOfRepetitions = array.filter(value => value >= max).length;
 
-    return [max,numberOfRepetitions];
+    return [max, numberOfRepetitions];
 }
 
 // non-exported function, that finds second largest value in array, and number of time it appears
-function findSecondLargestValueInArrayAndNumberOfRepetitions(array,max) {   
+function findSecondLargestValueInArrayAndNumberOfRepetitions(array, max) {
     const arrayWithoutMax = array.filter(value => value < max);
 
     const secondLargest = Math.max(...arrayWithoutMax);
 
     const numberOfRepetitions = arrayWithoutMax.filter(value => value >= secondLargest).length;
 
-    return [secondLargest,numberOfRepetitions];
+    return [secondLargest, numberOfRepetitions];
 }
 
 // non-exported function, converts visual score
@@ -189,7 +189,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     }
 
     // values of functional systems
-    let firstSevenArguments = [visualFunctionsScore,brainstemFunctionScore,pyramidalFunctionsScore,cerebellarFunctionsScore,sensoryFunctionsScore,bowelAndBladderFunctionsScore,cerebralFunctionsScore];
+    let firstSevenArguments = [visualFunctionsScore, brainstemFunctionScore, pyramidalFunctionsScore, cerebellarFunctionsScore, sensoryFunctionsScore, bowelAndBladderFunctionsScore, cerebralFunctionsScore];
 
     const maxValueAndNumberOfRepetitions = findMaxValueInArrayAndNumberOfRepetitions(firstSevenArguments);
 
@@ -197,7 +197,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
 
     const numberOfRepetitions = maxValueAndNumberOfRepetitions[1];
 
-    if (maxValue >= 5 ) {
+    if (maxValue >= 5) {
         return 5;
     }
 
@@ -206,7 +206,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     }
 
     if (maxValue === 4 && numberOfRepetitions === 1) {
-        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments, maxValue);
         const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
         const numberOfRepetitionsSecondLargest = secondLargestValueAndNumberOfRepetitions[1];
 
@@ -233,32 +233,28 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 4.5;
     }
 
-    if (maxValue === 3 ) {
+    if (maxValue === 3) {
         if (numberOfRepetitions === 5) {
             return 4.5;
         }
 
-        // we now its now <= 4
+        // we know its now <= 4
         if (numberOfRepetitions >= 2) {
 
             if (numberOfRepetitions === 2) {
-                const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+                const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments, maxValue);
                 const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
-    
-                if (secondLargest === 2) {
-                    return 4;
-                }
-    
+
                 if (secondLargest <= 1) {
                     return 3.5;
                 }
             }
-    
+
             return 4;
         }
 
         // number of repetitions is now 1
-        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments, maxValue);
         const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
         const numberOfRepetitionsSecondLargest = secondLargestValueAndNumberOfRepetitions[1];
 
@@ -271,9 +267,9 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
             return 3.5;
         }
 
-        if (secondLargest <= 1) {
-            return 3;
-        }
+
+        // second largest is now 0 or 1
+        return 3;
     }
 
 
@@ -282,7 +278,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         if (numberOfRepetitions >= 6) {
             return 4;
         }
-        
+
         if (numberOfRepetitions === 5) {
             return 3.5;
         }
