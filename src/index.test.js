@@ -72,8 +72,14 @@ describe("calculateEDSS", function(){
         expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
         randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),4)).to.equal(5.5);
         expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),3)).to.equal(5);
-        
+        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),3)).to.equal(5);   
+    });
+
+    it("should return 5.0 EDSS when the score is one of seven functional systems is greater or equal to 5", function(){
+        // randomZeroToMax is set to be lower than 5
+        // ambulation score is set to be 2, which shouldnt affect the score
+        expect(edss.calculateEDSS(6,randomZeroToMax(5),
+        randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),2)).to.equal(5);
     });
 
 });

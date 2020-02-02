@@ -1,3 +1,13 @@
+// non-exported function, that finds max value in array, and number of time it appears
+function findMaxValueInArrayAndNumberOfRepetitions(array) {
+    const max = Math.max(...array);
+
+    const numberOfRepetitions = array.filter(value => value >= max).length;
+
+    return [max,numberOfRepetitions];
+}
+
+
 // arguments are functional scores in eight different functional systems
 function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFunctionsScore, cerebellarFunctionsScore,
     sensoryFunctionsScore, bowelAndBladderFunctionsScore, cerebralFunctionsScore, ambulationScore) {
@@ -8,10 +18,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     }
 
     // check for argument types
-    // creating an array from arguments, to itereate
-    const argumentsArray = Array.from(arguments);
-
-    for (let argument of argumentsArray) {
+    for (let argument of arguments) {
         if (argument == null || !Number.isInteger(+argument) || +argument < 0) {
             throw new TypeError(`Argument is not a non-negative integer. argument = ${argument}`);
         }
@@ -105,27 +112,15 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 7;
     }
 
-    if (ambulationScore === 9) {
+    if (ambulationScore === 9 || ambulationScore === 8) {
         // bilateral assistance, ≥ 5 meters, but < 120 meters
-        return 6.5;
-    }
-
-    if (ambulationScore === 8) {
         // unilateral assistance, < 50 meters
         return 6.5;
     }
 
-    if (ambulationScore === 7) {
+    if (ambulationScore === 7 || ambulationScore === 6 || ambulationScore === 5) {
         // bilateral assistance, ≥ 120 meters
-        return 6;
-    }
-
-    if (ambulationScore === 6) {
         //  unilateral assistance, ≥ 50 meters
-        return 6;
-    }
-
-    if (ambulationScore === 5) {
         //  walking range < 100 meters without assistance
         return 6;
     }
@@ -140,7 +135,21 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 5;
     }
 
-    
+    // values of functional systems
+    let firstSevenArguments = Array.from(arguments);
+    firstSevenArguments.pop();
+
+    const maxValueAndNumberOfRepetitions = findMaxValueInArrayAndNumberOfRepetitions(firstSevenArguments);
+
+    const maxValue = maxValueAndNumberOfRepetitions[0];
+
+    const numberOfRepetitions = maxValueAndNumberOfRepetitions[1];
+
+    if (maxValue >= 5 ) {
+        return 5;
+    }
+
+
 
     return 0;
 }
