@@ -149,6 +149,14 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 5;
     }
 
+    if (maxValue === 4 && numberOfRepetitions >= 2) {
+        return 5;
+    }
+
+    if (maxValue === 3 && numberOfRepetitions >= 6) {
+        return 5;
+    }
+
 
 
     return 0;

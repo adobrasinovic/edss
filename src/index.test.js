@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var edss = require('./index');
 
 function randomZeroToMax(maxRange) {
-   return Math.floor(Math.random() * maxRange);
+   return Math.floor(Math.random() * (maxRange+1));
 }
 
 describe("calculateEDSS", function(){
@@ -45,41 +45,60 @@ describe("calculateEDSS", function(){
     it("should return correct EDSS values, when the score is determined solely by ambulationScore", function(){
         // using random numbers in valid range, because in these cases after checking the ambulationScore the rest of arguments should have no importance
         // this might help find some obscure bugs later on when the logic for calculating the EDSS score from first 7 arguments is added
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),16)).to.equal(10);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),15)).to.equal(9.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),14)).to.equal(9);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),13)).to.equal(8.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),12)).to.equal(8);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),11)).to.equal(7.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),10)).to.equal(7);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),9)).to.equal(6.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),8)).to.equal(6.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),7)).to.equal(6);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),6)).to.equal(6);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),5)).to.equal(6);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),4)).to.equal(5.5);
-        expect(edss.calculateEDSS(randomZeroToMax(7),randomZeroToMax(6),
-        randomZeroToMax(7),randomZeroToMax(6),randomZeroToMax(7),randomZeroToMax(7),randomZeroToMax(6),3)).to.equal(5);   
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),16)).to.equal(10);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),15)).to.equal(9.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),14)).to.equal(9);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),13)).to.equal(8.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),12)).to.equal(8);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),11)).to.equal(7.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),10)).to.equal(7);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),9)).to.equal(6.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),8)).to.equal(6.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),7)).to.equal(6);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),6)).to.equal(6);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),5)).to.equal(6);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),4)).to.equal(5.5);
+        expect(edss.calculateEDSS(randomZeroToMax(6),randomZeroToMax(5),
+        randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),3)).to.equal(5);   
     });
 
-    it("should return 5.0 EDSS when the score is one of seven functional systems is greater or equal to 5", function(){
+    it("should return 5.0 EDSS when the score in one of seven functional systems is greater or equal to 5", function(){
         // randomZeroToMax is set to be lower than 5
         // ambulation score is set to be 2, which shouldnt affect the score
-        expect(edss.calculateEDSS(6,randomZeroToMax(5),
-        randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),randomZeroToMax(5),2)).to.equal(5);
+        expect(edss.calculateEDSS(6,randomZeroToMax(4),
+        randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
+        expect(edss.calculateEDSS(5,randomZeroToMax(4),
+        randomZeroToMax(4),randomZeroToMax(4),5,randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
+        expect(edss.calculateEDSS(randomZeroToMax(4),randomZeroToMax(4),
+        randomZeroToMax(4),randomZeroToMax(4),5,randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
+    });
+
+    it("should return 5.0 EDSS when the max score in two or more functional systems is equal to 4", function(){
+        // ambulation score is set to be 2, which shouldnt affect the score
+        expect(edss.calculateEDSS(4,4,
+        randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),2)).to.equal(5);
+        expect(edss.calculateEDSS(4,4,
+            randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
+    });
+
+    it("should return 5.0 EDSS when the max score in six or seven functional systems is equal to 3", function(){
+        // randomZeroToMax is set to be lower than 5
+        // ambulation score is set to be 2, which shouldnt affect the score
+        expect(edss.calculateEDSS(3,3,3,3,3,3,2,2)).to.equal(5);
+        expect(edss.calculateEDSS(3,3,3,3,3,3,3,2)).to.equal(5);
     });
 
 });
