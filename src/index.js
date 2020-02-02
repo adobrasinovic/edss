@@ -32,7 +32,7 @@ function convertVisualScore(visualScore) {
         return 2;
     }
 
-    return 1;
+    return visualScore;
 }
 
 // non-exported function, converts visual score
@@ -224,6 +224,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
 
     }
 
+    // we check here because of ambulation score, this is the only case where it could go to 5
     if (maxValue === 3 && numberOfRepetitions >= 6) {
         return 5;
     }
@@ -232,21 +233,81 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 4.5;
     }
 
-    if (maxValue === 3 && numberOfRepetitions === 5) {
-        return 4.5;
-    }
-
-    if (maxValue === 3 && numberOfRepetitions >= 2 && numberOfRepetitions <=4) {
-        if (numberOfRepetitions === 2) {
-            const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
-            const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
-
-            if (secondLargest === 2) {
-                return 4;
-            }
+    if (maxValue === 3 ) {
+        if (numberOfRepetitions === 5) {
+            return 4.5;
         }
 
-        return 4;
+        // we now its now <= 4
+        if (numberOfRepetitions >= 2) {
+
+            if (numberOfRepetitions === 2) {
+                const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+                const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
+    
+                if (secondLargest === 2) {
+                    return 4;
+                }
+    
+                if (secondLargest <= 1) {
+                    return 3.5;
+                }
+            }
+    
+            return 4;
+        }
+
+        // number of repetitions is now 1
+        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+        const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
+        const numberOfRepetitionsSecondLargest = secondLargestValueAndNumberOfRepetitions[1];
+
+        if (secondLargest === 2) {
+            if (numberOfRepetitionsSecondLargest >= 3) {
+                return 4;
+            }
+
+            // second largest is 2, and is 1-2 times
+            return 3.5;
+        }
+
+        if (secondLargest <= 1) {
+            return 3;
+        }
+    }
+
+
+
+    if (maxValue === 2) {
+        if (numberOfRepetitions >= 6) {
+            return 4;
+        }
+        
+        if (numberOfRepetitions === 5) {
+            return 3.5;
+        }
+
+        if (numberOfRepetitions === 3 || numberOfRepetitions === 4) {
+            return 3;
+        }
+
+        if (numberOfRepetitions === 2) {
+            return 2.5;
+        }
+
+        return 2;
+    }
+
+    if (ambulationScore === 1) {
+        return 2;
+    }
+
+    if (maxValue === 1) {
+        if (numberOfRepetitions >= 2) {
+            return 1.5;
+        }
+
+        return 1;
     }
 
 

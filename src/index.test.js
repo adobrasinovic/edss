@@ -140,6 +140,69 @@ describe("calculateEDSS", function(){
         expect(edss.calculateEDSS(0,0,0,3,2,0,3,1)).to.equal(4);
         expect(edss.calculateEDSS(2,3,3,3,2,2,3,1)).to.equal(4);
     });
-    
+
+    it("should return 4.0 EDSS when the max score in functional systems is 2 and it appears 6 to 7 times", function(){
+        expect(edss.calculateEDSS(0,2,2,2,2,2,2,1)).to.equal(4);
+        expect(edss.calculateEDSS(2,2,2,2,2,2,2,1)).to.equal(4);
+    });
+
+
+    it("should return 4.0 EDSS when the max score in functional systems is 3 and it appears once, and second largest is 2 and it appears 3 or more times", function(){
+        expect(edss.calculateEDSS(2,2,2,2,2,2,3,1)).to.equal(4);
+        expect(edss.calculateEDSS(2,2,2,0,0,0,3,1)).to.equal(4);
+    });
+
+    it("should return 3.5 EDSS when the max score in functional systems is 3 and it appears once, and second largest is 2 and it appears one or two times", function(){
+        expect(edss.calculateEDSS(2,2,0,0,0,0,3,1)).to.equal(3.5);
+        expect(edss.calculateEDSS(2,0,0,0,0,0,3,1)).to.equal(3.5);
+    });
+
+    it("should return 3.5 EDSS when the max score in functional systems is 3 and it appears 2 times, and second largest score is 1 or 0", function(){
+        expect(edss.calculateEDSS(0,0,0,3,1,0,3,1)).to.equal(3.5);
+        expect(edss.calculateEDSS(0,0,0,3,0,0,3,1)).to.equal(3.5);
+    });
+
+    it("should return 3.5 EDSS when the max score in functional systems is 2 and it appears 5 times", function(){
+        expect(edss.calculateEDSS(2,2,2,2,2,0,0,1)).to.equal(3.5);
+    });
+
+    it("should return 3.0 EDSS when the max score in functional systems is 3 and it appears once, and second largest is 1 or 0", function(){
+        expect(edss.calculateEDSS(1,3,1,1,1,1,1,1)).to.equal(3);
+        expect(edss.calculateEDSS(0,3,0,0,0,0,0,0)).to.equal(3);
+    });
+
+
+    it("should return 3.0 EDSS when the max score in functional systems is 2 and it appears 3 or 4 times", function(){
+        expect(edss.calculateEDSS(2,2,2,2,0,0,0,1)).to.equal(3);
+        expect(edss.calculateEDSS(2,2,2,0,0,0,0,1)).to.equal(3);
+    });
+
+    it("should return 2.5 EDSS when the max score in functional systems is 2 and it appears 2 times", function(){
+        expect(edss.calculateEDSS(2,2,0,0,0,0,0,1)).to.equal(2.5);
+    });
+
+
+    it("should return 2 EDSS when the max score in functional systems is 2 and it appears once", function(){
+        expect(edss.calculateEDSS(2,0,0,0,0,0,0,1)).to.equal(2);
+    });
+
+    it("should return 2 EDSS when the ambulation score is 1", function(){
+        expect(edss.calculateEDSS(randomZeroToMax(1),randomZeroToMax(1),randomZeroToMax(1),randomZeroToMax(1),randomZeroToMax(1),randomZeroToMax(1),randomZeroToMax(1),1)).to.equal(2);
+    });
+
+    it("should return 1.5 EDSS when the max score in functional systems is 1 and it appears more than 2 times", function(){
+        expect(edss.calculateEDSS(1,1,1,1,1,1,1,0)).to.equal(1.5);
+        expect(edss.calculateEDSS(1,1,0,0,0,0,0,0)).to.equal(1.5);
+    });
+
+    it("should return 1 EDSS when the max score in functional systems is 1 and it appears once", function(){
+        expect(edss.calculateEDSS(1,0,0,0,0,0,0,0)).to.equal(1);
+        expect(edss.calculateEDSS(0,0,0,0,0,1,0,0)).to.equal(1);
+        expect(edss.calculateEDSS(0,0,0,1,0,0,0,0)).to.equal(1);
+    });
+
+    it("should return 0 EDSS when all scores are 0", function(){
+        expect(edss.calculateEDSS(0,0,0,0,0,0,0,0)).to.equal(0);
+    });
 
 });
