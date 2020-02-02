@@ -7,6 +7,53 @@ function findMaxValueInArrayAndNumberOfRepetitions(array) {
     return [max,numberOfRepetitions];
 }
 
+// non-exported function, that finds second largest value in array, and number of time it appears
+function findSecondLargestValueInArrayAndNumberOfRepetitions(array,max) {   
+    const arrayWithoutMax = array.filter(value => value < max);
+
+    const secondLargest = Math.max(...arrayWithoutMax);
+
+    const numberOfRepetitions = arrayWithoutMax.filter(value => value >= secondLargest).length;
+
+    return [secondLargest,numberOfRepetitions];
+}
+
+// non-exported function, converts visual score
+function convertVisualScore(visualScore) {
+    if (visualScore === 6) {
+        return 4;
+    }
+
+    if (visualScore === 5 || visualScore === 4) {
+        return 3;
+    }
+
+    if (visualScore === 3 || visualScore === 2) {
+        return 2;
+    }
+
+    return 1;
+}
+
+// non-exported function, converts visual score
+function convertBowelAndBladderScore(bowelAndBladderScore) {
+    if (bowelAndBladderScore === 6) {
+        return 5;
+    }
+
+    if (bowelAndBladderScore === 5) {
+        return 4;
+    }
+
+    if (bowelAndBladderScore === 4 || bowelAndBladderScore === 3) {
+        return 3;
+    }
+
+    return bowelAndBladderScore;
+}
+
+
+
 
 // arguments are functional scores in eight different functional systems
 function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFunctionsScore, cerebellarFunctionsScore,
@@ -30,6 +77,9 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     if (visualFunctionsScore > 6) {
         throw new Error(`Argument is out of bounds. visualFunctionsScore`);
     }
+
+    // converting visual score
+    visualFunctionsScore = convertVisualScore(visualFunctionsScore);
 
     brainstemFunctionScore = +brainstemFunctionScore;
 
@@ -60,6 +110,9 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     if (bowelAndBladderFunctionsScore > 6) {
         throw new Error(`Argument is out of bounds. bowelAndBladderFunctionsScore`);
     }
+
+    // converting bowel and bladder score 
+    bowelAndBladderFunctionsScore = convertBowelAndBladderScore(bowelAndBladderFunctionsScore);
 
     cerebralFunctionsScore = +cerebralFunctionsScore;
 
@@ -153,8 +206,31 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
         return 5;
     }
 
+    if (maxValue === 4 && numberOfRepetitions === 1) {
+        const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+        const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
+        const numberOfRepetitionsSecondLargest = secondLargestValueAndNumberOfRepetitions[1];
+
+        if (secondLargest === 3 && numberOfRepetitionsSecondLargest > 2) {
+            return 5;
+        }
+
+        if (secondLargest === 3 || secondLargest === 2) {
+            return 4.5;
+        }
+
+    }
+
     if (maxValue === 3 && numberOfRepetitions >= 6) {
         return 5;
+    }
+
+    if (ambulationScore === 2) {
+        return 4.5;
+    }
+
+    if (maxValue === 3 && numberOfRepetitions === 5) {
+        return 4.5;
     }
 
 

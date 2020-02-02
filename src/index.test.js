@@ -75,10 +75,11 @@ describe("calculateEDSS", function(){
         randomZeroToMax(6),randomZeroToMax(5),randomZeroToMax(6),randomZeroToMax(6),randomZeroToMax(5),3)).to.equal(5);   
     });
 
+    // visualFunctionsScore and bowerAndBladderFunctionsScore have their own conversion rates, that are set in calculateEDSS function
     it("should return 5.0 EDSS when the score in one of seven functional systems is greater or equal to 5", function(){
         // randomZeroToMax is set to be lower than 5
         // ambulation score is set to be 2, which shouldnt affect the score
-        expect(edss.calculateEDSS(6,randomZeroToMax(4),
+        expect(edss.calculateEDSS(randomZeroToMax(6),5,
         randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
         expect(edss.calculateEDSS(5,randomZeroToMax(4),
         randomZeroToMax(4),randomZeroToMax(4),5,randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
@@ -88,17 +89,46 @@ describe("calculateEDSS", function(){
 
     it("should return 5.0 EDSS when the max score in two or more functional systems is equal to 4", function(){
         // ambulation score is set to be 2, which shouldnt affect the score
-        expect(edss.calculateEDSS(4,4,
-        randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),2)).to.equal(5);
-        expect(edss.calculateEDSS(4,4,
-            randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
+        expect(edss.calculateEDSS(randomZeroToMax(3),4,
+        4,randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),randomZeroToMax(3),2)).to.equal(5);
+        expect(edss.calculateEDSS(randomZeroToMax(4),4,
+            4,randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),randomZeroToMax(4),2)).to.equal(5);
     });
 
     it("should return 5.0 EDSS when the max score in six or seven functional systems is equal to 3", function(){
-        // randomZeroToMax is set to be lower than 5
+        // visual and bladder scores are converted (lowered)
         // ambulation score is set to be 2, which shouldnt affect the score
-        expect(edss.calculateEDSS(3,3,3,3,3,3,2,2)).to.equal(5);
-        expect(edss.calculateEDSS(3,3,3,3,3,3,3,2)).to.equal(5);
+        expect(edss.calculateEDSS(4,3,3,3,3,3,2,2)).to.equal(5);
+        expect(edss.calculateEDSS(4,3,3,3,3,3,3,2)).to.equal(5);
     });
+
+    it("should return 5.0 EDSS when the max score in one system is 4 and second largest score is 3 in 3 or more systems", function(){
+        // ambulation score is set to be 2, which shouldnt affect the score
+        expect(edss.calculateEDSS(1,4,3,3,3,1,1,2)).to.equal(5);
+        expect(edss.calculateEDSS(4,4,3,3,3,3,3,2)).to.equal(5);
+    });
+
+    it("should return 4.5 EDSS when the ambulation score is 2, when the scores of other functional system dont return 5", function(){
+        // two edge cases for FS scores
+        expect(edss.calculateEDSS(5,1,1,1,1,1,1,2)).to.equal(4.5);
+        expect(edss.calculateEDSS(4,3,3,3,3,1,1,2)).to.equal(4.5);
+    });
+
+    it("should return 4.5 EDSS when the max score in functional systems is 4 and 1 or 2 repetitons of 3 as second largest", function(){
+        expect(edss.calculateEDSS(1,4,3,3,1,1,1,1)).to.equal(4.5);
+        expect(edss.calculateEDSS(1,4,3,1,1,1,1,1)).to.equal(4.5);
+    });
+
+    it("should return 4.5 EDSS when the max score in functional systems is 3 and it appears 5 times", function(){
+        // two edge cases for FS scores
+        expect(edss.calculateEDSS(1,3,3,3,3,1,3,1)).to.equal(4.5);
+    });
+
+    it("should return 4.5 EDSS when the max score in functional systems is 4 and it appears only once, and second largest score is 2", function(){
+        // two edge cases for FS scores
+        expect(edss.calculateEDSS(1,2,1,1,1,1,4,1)).to.equal(4.5);
+        expect(edss.calculateEDSS(2,2,2,2,2,2,4,1)).to.equal(4.5);
+    });
+    
 
 });
