@@ -112,6 +112,8 @@ describe("calculateEDSS", function(){
         // two edge cases for FS scores
         expect(edss.calculateEDSS(5,1,1,1,1,1,1,2)).to.equal(4.5);
         expect(edss.calculateEDSS(4,3,3,3,3,1,1,2)).to.equal(4.5);
+        expect(edss.calculateEDSS(0,0,0,0,0,0,4,2)).to.equal(4.5);
+
     });
 
     it("should return 4.5 EDSS when the max score in functional systems is 4 and 1 or 2 repetitons of 3 as second largest", function(){
@@ -120,14 +122,23 @@ describe("calculateEDSS", function(){
     });
 
     it("should return 4.5 EDSS when the max score in functional systems is 3 and it appears 5 times", function(){
-        // two edge cases for FS scores
         expect(edss.calculateEDSS(1,3,3,3,3,1,3,1)).to.equal(4.5);
     });
 
     it("should return 4.5 EDSS when the max score in functional systems is 4 and it appears only once, and second largest score is 2", function(){
-        // two edge cases for FS scores
         expect(edss.calculateEDSS(1,2,1,1,1,1,4,1)).to.equal(4.5);
         expect(edss.calculateEDSS(2,2,2,2,2,2,4,1)).to.equal(4.5);
+    });
+    
+
+    it("should return 4.0 EDSS when the max score in functional systems is 4 and it appears only once, and second largest score is 1 or 0", function(){
+        expect(edss.calculateEDSS(1,1,1,1,1,1,4,1)).to.equal(4);
+        expect(edss.calculateEDSS(0,0,0,0,0,0,4,1)).to.equal(4);
+    });
+
+    it("should return 4.0 EDSS when the max score in functional systems is 3 and it appears 2 to 4 times, and second largest score is 2", function(){
+        expect(edss.calculateEDSS(0,0,0,3,2,0,3,1)).to.equal(4);
+        expect(edss.calculateEDSS(2,3,3,3,2,2,3,1)).to.equal(4);
     });
     
 

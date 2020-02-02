@@ -189,8 +189,7 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
     }
 
     // values of functional systems
-    let firstSevenArguments = Array.from(arguments);
-    firstSevenArguments.pop();
+    let firstSevenArguments = [visualFunctionsScore,brainstemFunctionScore,pyramidalFunctionsScore,cerebellarFunctionsScore,sensoryFunctionsScore,bowelAndBladderFunctionsScore,cerebralFunctionsScore];
 
     const maxValueAndNumberOfRepetitions = findMaxValueInArrayAndNumberOfRepetitions(firstSevenArguments);
 
@@ -219,6 +218,10 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
             return 4.5;
         }
 
+        if (ambulationScore < 2 && secondLargest < 2) {
+            return 4;
+        }
+
     }
 
     if (maxValue === 3 && numberOfRepetitions >= 6) {
@@ -231,6 +234,19 @@ function calculateEDSS(visualFunctionsScore, brainstemFunctionScore, pyramidalFu
 
     if (maxValue === 3 && numberOfRepetitions === 5) {
         return 4.5;
+    }
+
+    if (maxValue === 3 && numberOfRepetitions >= 2 && numberOfRepetitions <=4) {
+        if (numberOfRepetitions === 2) {
+            const secondLargestValueAndNumberOfRepetitions = findSecondLargestValueInArrayAndNumberOfRepetitions(firstSevenArguments,maxValue);
+            const secondLargest = secondLargestValueAndNumberOfRepetitions[0];
+
+            if (secondLargest === 2) {
+                return 4;
+            }
+        }
+
+        return 4;
     }
 
 
