@@ -23,7 +23,7 @@ describe("calculateEDSS", function(){
     });
 
     // visualFunctionsScore 0 - 6
-    // brainstemFunctionScore 0 - 5
+    // brainstemFunctionsScore 0 - 5
     // pyramidalFunctionsScore 0 - 6 
     // cerebellarFunctionsScore 0 - 5
     // sensoryFunctionsScore 0 - 6
@@ -33,7 +33,7 @@ describe("calculateEDSS", function(){
 
     it("should throw an error if an argument is out of bounds", function(){
         expect(() => edss.calculateEDSS(7,1,1,1,1,1,1,1)).to.throw('Argument is out of bounds. visualFunctionsScore'); 
-        expect(() => edss.calculateEDSS(1,6,1,1,1,1,1,1)).to.throw('Argument is out of bounds. brainstemFunctionScore'); 
+        expect(() => edss.calculateEDSS(1,6,1,1,1,1,1,1)).to.throw('Argument is out of bounds. brainstemFunctionsScore'); 
         expect(() => edss.calculateEDSS(1,1,7,1,1,1,1,1)).to.throw('Argument is out of bounds. pyramidalFunctionsScore'); 
         expect(() => edss.calculateEDSS(1,1,1,6,1,1,1,1)).to.throw('Argument is out of bounds. cerebellarFunctionsScore'); 
         expect(() => edss.calculateEDSS(1,1,1,1,7,1,1,1)).to.throw('Argument is out of bounds. sensoryFunctionsScore');
