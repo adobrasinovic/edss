@@ -2,6 +2,11 @@
   "name": "edss",
   "version": "1.0.1",
   "description": "Expanded Disability Status Scale (EDSS) Calculator",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/aleksandar-dobrasinovic/edss"
+  },
+  "homepage": "https://github.com/aleksandar-dobrasinovic/edss",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha src/index.test.js"
