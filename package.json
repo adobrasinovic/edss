@@ -1,6 +1,6 @@
 {
   "name": "edss",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Expanded Disability Status Scale (EDSS) Calculator",
   "repository": {
     "type": "git",
