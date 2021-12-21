@@ -58,7 +58,7 @@ const  edssResult = edss.calculateEDSS(1,2,1,3,1,4,2,1);
 
   
 
-Demo is avaliable on GitHub Pages for this repository, [right here](https://aleksandar-dobrasinovic.github.io/edss/).
+Demo is avaliable on GitHub Pages for this repository, [right here](https://adobrasinovic.github.io/edss/).
 
   
 
