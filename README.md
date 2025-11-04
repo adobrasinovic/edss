@@ -10,9 +10,10 @@
 **The Expanded Disability Status Scale (EDSS)** is the most common clinical scoring system used to evaluate the condition of Multiple Sclerosis (MS) patients. The overall disability score ranges from 0 (normal) to 10 (death due to MS) in half-point increments
 
   
-  
 
-The scale has been developed by **John F. Kurtzke.** The EDSS quantifies disability in eight Functional Systems (FS) and allows neurologists to assign a Functional System Score (FSS) in each of these.
+The EDSS scoring table scale has been was originally developed by **John F. Kurtzke** in 1983. The Neurostatus-EDSS™ was subsequently developed, standardized, and adapted from the Kurtzke’s version.
+
+The Neurostatus- EDSS qualifies disability in eight seven Functional Systems (FS) plus ambulation and allows neurologists to assign a Functional System Score (FSS) in each of these.
 
   
 
@@ -103,10 +104,6 @@ Arguments in order are:
   
 
 EDSS range is 0 to 10, in half point increments. Values above 5 are calculated solely based on ambulation score. Values from 0 to 5 are more complex, I relied on **"Scoring table for a standardised, quantified neurological examination and assessment of Kurtzke‘s Functional Systems and Expanded Disability Status Scale in Multiple Sclerosis"** by **Ludwig Kappos, MD** from **University Hospital Basel, Switzerland.**
-
-  
-
-![Table used to calculate scores determined by functional systems](https://i.imgur.com/FjM5HTf.png)
 
   
 
