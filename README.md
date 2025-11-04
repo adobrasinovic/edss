@@ -11,9 +11,9 @@
 
   
 
-The EDSS scoring table scale has been was originally developed by **John F. Kurtzke** in 1983. The Neurostatus-EDSS™ was subsequently developed, standardized, and adapted from the Kurtzke’s version.
+The EDSS scoring table originally developed by **John F. Kurtzke** in 1983. The Neurostatus-EDSS™ was subsequently developed, standardized, and adapted from the Kurtzke’s version.
 
-The Neurostatus- EDSS qualifies disability in eight seven Functional Systems (FS) plus ambulation and allows neurologists to assign a Functional System Score (FSS) in each of these.
+The Neurostatus-EDSS™ qualifies disability in seven Functional Systems (FS) plus ambulation and allows neurologists to assign a Functional System Score (FSS) in each of these.
 
   
 
